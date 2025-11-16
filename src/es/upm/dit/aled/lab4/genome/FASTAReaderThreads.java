@@ -121,6 +121,7 @@ public class FASTAReaderThreads {
 		for(int i = 0;i<cores;i++){
 			int lo = i*segmento;
 			int hi = i*segmento;
+			validBytes : (i + 1) * segmentLength;
 			
 		}
 		
