@@ -52,7 +52,7 @@ public class FASTASearchCallable implements Callable<List<Integer>> {
 	public List<Integer> call() throws Exception {
 		
 			List<Integer> coincidencias = new ArrayList<Integer>();
-			for (int i = 0; i < this.pattern; i++) {
+			for (int i = lo; i < hi; i++) {
 				try {
 					if (compare(pattern, i)) {
 						coincidencias.add(i);
