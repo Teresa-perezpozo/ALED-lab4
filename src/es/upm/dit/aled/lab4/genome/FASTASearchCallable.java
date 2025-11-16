@@ -64,9 +64,6 @@ public class FASTASearchCallable implements Callable<List<Integer>> {
 			return coincidencias;
 		}
 
-		
-		return null;
-	}
 
 	/*
 	 * Helper method that checks if a pattern appears at a specific position in the
