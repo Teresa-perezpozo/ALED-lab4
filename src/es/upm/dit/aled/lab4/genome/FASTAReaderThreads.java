@@ -117,10 +117,10 @@ public class FASTAReaderThreads {
 	public List<Integer> search(byte[] pattern) {
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
-		int segment = validBytes/cores;//calculo a cuanto toca cada uno
+		int segmento = validBytes/cores;//calculo a cuanto toca cada uno
 		for(int i = 0;i<cores;i++){
-			int loCore = i*lo;
-			int hiCore = i*hi;
+			int lo = i*segmento;
+			int hi = i*segmento;
 			
 		}
 		
