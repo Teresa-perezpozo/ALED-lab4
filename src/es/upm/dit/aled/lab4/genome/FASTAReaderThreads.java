@@ -115,11 +115,13 @@ public class FASTAReaderThreads {
 	 *         pattern in the data.
 	 */
 	public List<Integer> search(byte[] pattern) {
+		//lo que voy a devolver con las posiciones donde se enceuntra el patrón
 		List<Integer> results = new ArrayList<Integer>(0);
-
+		//creo los cores, en mi caso tenogo 10 pero por si acaso lo indico así
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
 		Future<List<Integer>>[] futures = new Future[cores];
+		//hay que rodear las tareas a threads con try catch por si acaso 
 		try {
 		int segmento = validBytes/cores;//calculo a cuanto toca cada uno
 		int lo = 0;
