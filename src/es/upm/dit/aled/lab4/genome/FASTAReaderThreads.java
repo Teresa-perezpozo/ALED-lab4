@@ -115,21 +115,32 @@ public class FASTAReaderThreads {
 	 *         pattern in the data.
 	 */
 	public List<Integer> search(byte[] pattern) {
+		List<Integer> results = new ArrayList<Integer>(0);
+
 		int cores = Runtime.getRuntime().availableProcessors();
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
+		Future<List<Integer>>[] futures = new Future[cores];
+		try {
 		int segmento = validBytes/cores;//calculo a cuanto toca cada uno
-		for(int i = 0;i<cores;i++){
-			int lo = i*segmento;
-			int hi = i*segmento;
-			validBytes : (i + 1) * segmentLength;
-			
+		int lo = 0;
+		int hi = lo + segmento;
+		
+		for (int i = 0; i < cores; i++) {
+			Callable<List<Integer>> task = new FASTASearchCallable(this, lo, hi, pattern);
+			Future<List<Integer>> future = executor.submit(task);
+			futures[i] = future;
+			lo += segmento;
+			hi += segmento;
 		}
-		
-		
+		for (int i = 0; i < futures.length; i++) {
+			results.addAll(futures[i].get());
+		}
 		executor.shutdown();
-
-		return null;
+	} catch (Exception e) {
+		System.out.println("Task was interrupted: " + e.getMessage());
 	}
+	return results;
+}
 
 	public static void main(String[] args) {
 		long t1 = System.nanoTime();
