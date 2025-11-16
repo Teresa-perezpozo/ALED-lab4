@@ -16,7 +16,7 @@ import es.upm.dit.aled.lab4.er.gui.Position2D;
  * @author rgarciacarmona
  */
 public class Area {
-}
+
 	private String name;
 	private int time;
 	private Position2D position;
